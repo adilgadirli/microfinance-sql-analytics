@@ -51,3 +51,9 @@ The database consists of three relational tables enforced via PRIMARY KEY, FOREI
 - **Delinquency Measurement:** Delinquency (days_late) is evaluated dynamically at the payment level rather than relying on static loan status labels.
 - **PAR30+ Definition:** Portfolio at Risk > 30 Days represents the percentage of outstanding loan principal on accounts overdue by more than 30 days.
 - **Data Integrity Alignment:** Closed accounts maintain a strict 0% risk baseline, while Defaulted accounts strictly reflect severe delinquency (>90 days late).
+
+## Python ETL Pipeline & Data Mart Layer
+The project features an automated Python ETL script (`etl_pipeline.py`) powered by `pandas` and `sqlalchemy` to transform raw operational tables into a reporting layer:
+- **Extract:** Ingests relational tables (`loans` and `payments`) from the PostgreSQL database (`microfinance_analytics`).
+- **Transform:** Aggregates peak delinquency days (`days_late`) per account and assigns risk classifications (`1. Current`, `2. PAR 1-30`, `3. PAR 31-90`, `4. NPL / PAR 90+`).
+- **Load:** Dynamically writes the structured analytical output into a new database table (`data_mart_risk`) for Power BI reporting.
