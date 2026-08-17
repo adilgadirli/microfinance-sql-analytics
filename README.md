@@ -33,7 +33,7 @@ The database consists of three relational tables enforced via PRIMARY KEY, FOREI
 - **Business Question:** Which California municipal markets generate the highest average ticket sizes above a $4,000 threshold?
 - **Technical Highlights:** Implements GROUP BY c.city combined with HAVING AVG(l.loan_amount) > 4000 to isolate high-value lending hubs.
 
-![City Portfolio Performance](images/query2_city_performance.png)
+![City Portfolio Performance](dashboard.png)
 
 ### 3. Sequential Borrowing & Delta Analysis
 - **Business Question:** Are repeat borrowers expanding their credit intake over sequential loan originations?
@@ -42,8 +42,6 @@ The database consists of three relational tables enforced via PRIMARY KEY, FOREI
 ### 4. Portfolio Delinquency Risk & PAR30+ Rate
 - **Business Question:** What is the PAR30+ delinquency rate across active, closed, and defaulted loan portfolios?
 - **Technical Highlights:** Constructs a CTE (RiskAnalysis) aggregating maximum delinquency days (MAX(days_late)) per account. Applies conditional aggregation (CASE WHEN max_days_late > 30 THEN loan_amount ELSE 0 END) and zero-division protection via NULLIF().
-
-![PAR30+ Risk Analysis](images/query1_risk_analysis.png)
 
 ---
 
